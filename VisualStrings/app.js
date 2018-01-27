@@ -1,4 +1,4 @@
-var shape = "circle";
+var shape = "rect";
 var fillColor = "yellow";
 var background = "#eee";
 var canvasID = "display-canvas";
