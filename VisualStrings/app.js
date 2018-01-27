@@ -3,7 +3,9 @@ var fillColor = "yellow";
 var background = "#eee";
 var canvasID = "display-canvas";
 var displayInterval = 300;
-var inputString = "the quick brown fox jumped over the lazy dogs.";
+var inputString = "...the quick brown fox jumped over the lazy dogs...";
+var scaleDownFactor = 0.3;
+var opacityReduction = 0.3;
 
 var canvas = new fabric.StaticCanvas(canvasID);
 canvas.setBackgroundColor(background);
@@ -34,8 +36,25 @@ data.forEach(function(item, index) {
     
     console.log("Offset: ", offset);
     shapeObj.set(offset);
+    
+    // Animations.
+    shapeObj.animate("scaleX", "-=" + scaleDownFactor);
+    shapeObj.animate("scaleY", "-=" + scaleDownFactor);
+    shapeObj.animate("left", "+=" + index);
+    
+    shapeObj.animate("opacity", "-=" + opacityReduction, { 
+      onChange: canvas.renderAll.bind(canvas) 
+    });
+    
     canvas.add(shapeObj);
     
-
   }, index * displayInterval, item);
 });
+
+var text = new fabric.Text(inputString, 
+{ 
+  left: 100, 
+  top: 100,
+  fontSize: 20
+});
+canvas.add(text);
