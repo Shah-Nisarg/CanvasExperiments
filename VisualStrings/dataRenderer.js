@@ -86,7 +86,6 @@ var DataRenderer = (function() {
   var getCellOffsets = function (cellIndex) {
     var top, left;
     var coordinates = getCellCoordinates(cellIndex);
-    console.log("XY", coordinates)
     
     return {
       top: coordinates.X * cellHeight,
