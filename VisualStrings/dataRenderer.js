@@ -53,12 +53,12 @@ var DataRenderer = (function() {
   // Returns the XY coordinates of the cell on the grid.
   // Ex.: Starts from 0,0 to 3,6 in case of a 4x7 grid.
   // TODO: Write test cases.
-  var getCellCoordinates = function (cellIndex) {
+  var getCellCoordinates = function (item) {
     
     // cellIndex could be larger than the supported count of cells.
     // To prevent issues, take the modulo for now.
     // TODO: Use scaling to indicate the multiplier.
-    var effectiveCellIndex = cellIndex % totalCells;
+    var effectiveCellIndex = item.code % totalCells;
     
     var longDim_index = 0;
     var shortDim_index = 0;
@@ -83,13 +83,14 @@ var DataRenderer = (function() {
   }
   
   // Converts the cell index to location on canvas - height and width.
-  var getCellOffsets = function (cellIndex) {
+  var getCellOffsets = function (item) {
     var top, left;
-    var coordinates = getCellCoordinates(cellIndex);
+    var coordinates = getCellCoordinates(item);
     
     return {
       top: coordinates.X * cellHeight,
-      left: coordinates.Y * cellWidth
+      left: coordinates.Y * cellWidth,
+      label: item.label
     };
   };
   

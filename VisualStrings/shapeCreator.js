@@ -9,11 +9,13 @@ var ShapeCreator = (function (){
 
     switch (shape) {
       case "circle":
+      case "labeledCircle":
         let smallDimension = Math.min(cellWidth, cellHeight);
         shapeConfig["radius"] = smallDimension / 2;
         break;
         
       case "rect":
+      case "labeledRect":
         shapeConfig["width"] = cellWidth;
         shapeConfig["height"] = cellHeight;
         break;
@@ -34,11 +36,25 @@ var ShapeCreator = (function (){
         return circle;
         break;
 
+      case "labeledCircle":
+        let labCircle = new LabeledCircle(config);
+        labCircle.set("fill", color);
+        labCircle.set({ stroke: "black" });
+        return labCircle;
+        break;
+        
       case "rect":
         let rect = new fabric.Rect(config);
         rect.set("fill", color);
         rect.set({ stroke: "black" });
         return rect;
+        break;
+        
+      case "labeledRect":
+        let labRect = new LabeledRect(config);
+        labRect.set("fill", color);
+        labRect.set({ stroke: "black" });
+        return labRect;
         break;
         
       default:
